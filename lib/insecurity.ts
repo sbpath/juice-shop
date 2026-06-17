@@ -51,7 +51,7 @@ export const cutOffPoisonNullByte = (str: string) => {
   return str
 }
 
-// Updated isAuthorized implementation
+// Updated isAuthorized implementation - updated
 export const isAuthorized = () => {
   return (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : req.cookies.token
@@ -76,9 +76,7 @@ export const isAuthorized = () => {
 }
 // Add issuer, audience claims to our JWT creation
 export const authorize = (user = {}) => jwt.sign(user, privateKey, { expiresIn: '6h', algorithm: 'RS256', issuer: 'juice-shop', audience: 'web' })
-//export const isAuthorized = () => expressJwt(({ secret: publicKey }) as any)
 export const denyAll = () => expressJwt({ secret: '' + Math.random() } as any)
-//export const authorize = (user = {}) => jwt.sign(user, privateKey, { expiresIn: '6h', algorithm: 'RS256' })
 export const verify = (token: string) => token ? (jws.verify as ((token: string, secret: string) => boolean))(token, publicKey) : false
 export const decode = (token: string) => { return jws.decode(token)?.payload }
 
